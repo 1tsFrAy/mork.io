@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MORK — Tattoo Artist</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#09090a;color:#f4f2ef;font-family:Inter,Arial,sans-serif}
+button,input,select,textarea{font:inherit}
+
+nav{height:70px;border-bottom:1px solid #262629;display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;background:#09090aed;backdrop-filter:blur(12px);z-index:10}
+.logo{font-size:19px;font-weight:900;letter-spacing:5px;color:#fff;text-decoration:none}
+.navlinks{display:flex;gap:25px;color:#aaa;font-size:14px}
+.navlinks a{color:inherit;text-decoration:none;transition:color .2s}
+.navlinks a:hover{color:#fff}
+.nav-right{display:flex;align-items:center;gap:12px}
+
+.lang-select{background:#151518;color:#eee;border:1px solid #303034;border-radius:8px;padding:6px 10px;font-weight:700;cursor:pointer}
+
+.btn{border:0;border-radius:10px;padding:13px 18px;background:#f1eee9;color:#111;font-weight:800;cursor:pointer;transition:opacity .2s;text-decoration:none;display:inline-block;text-align:center}
+.btn:hover{opacity:.9}
+.btn.ghost{background:#151518;color:#eee;border:1px solid #303034}
+.btn.ghost:hover{background:#222226}
+.btn.accent{background:#d85a73;color:#fff}
+
+.hero{min-height:600px;padding:80px 6%;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;background:radial-gradient(circle at 78% 30%,#341b22,transparent 40%)}
+.eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#d85a73;font-weight:800}
+h1{font-size:clamp(55px,8vw,105px);line-height:.86;margin:18px 0 28px;letter-spacing:-5px}
+.hero p{max-width:570px;color:#aaa;line-height:1.7;font-size:17px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:25px}
+
+.visual{height:420px;border:1px solid #303034;border-radius:26px;background:linear-gradient(145deg,#19191d,#0c0c0e);display:grid;place-items:center;position:relative;overflow:hidden}
+.visual .symbol{font-size:170px;transform:rotate(-18deg);opacity:.9;user-select:none}
+.tag{position:absolute;bottom:18px;left:18px;background:#0c0c0dd9;border:1px solid #343438;border-radius:99px;padding:9px 16px;font-size:11px;color:#aaa;letter-spacing:1px}
+
+section{padding:80px 6%}
+.title{font-size:40px;letter-spacing:-1px;margin:8px 0 35px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{background:#121214;border:1px solid #27272b;border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
+.preview{height:170px;border-radius:12px;background:#0b0b0d;display:grid;place-items:center;font-size:78px;margin-bottom:18px;user-select:none}
+.card h3{margin:5px 0 8px}
+.muted{color:#96969b;line-height:1.55}
+.price{font-size:15px;font-weight:700;color:#eee;margin:15px 0}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter{border:1px solid #303034;background:#111114;color:#aaa;padding:9px 16px;border-radius:99px;cursor:pointer;transition:all .2s}
+.filter.active{background:#eee;color:#111;border-color:#eee}
+
+.builder,.model-section{background:#101012;border-block:1px solid #252529}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.field{margin:16px 0}
+.field label{display:block;color:#999;font-size:12px;margin-bottom:7px}
+input,select,textarea{width:100%;background:#09090b;color:#eee;border:1px solid #35353a;border-radius:99px;padding:12px 18px;outline:none;transition:border-color .2s}
+textarea{border-radius:14px;resize:vertical}
+input:focus,select:focus,textarea:focus{border-color:#d85a73}
+
+.estimate{border:1px solid #35353a;background:#0a0a0c;border-radius:18px;padding:28px;display:flex;flex-direction:column;justify-content:space-between}
+.estimate .num{font-size:48px;font-weight:900;margin:10px 0;color:#f4f2ef}
+
+.model-card{background:linear-gradient(135deg,#1c1216,#101012);border:1px solid #4a1f28;border-radius:20px;padding:30px;display:flex;flex-direction:column;justify-content:space-between}
+
+footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.toast{position:fixed;bottom:22px;right:22px;background:#eee;color:#111;padding:14px 20px;border-radius:10px;font-weight:700;display:none;z-index:200;box-shadow:0 10px 30px #0008}
+
+.burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer}
+
+@media(max-width:800px){
+  .hero,.two{grid-template-columns:1fr}
+  .visual{height:300px}
+  .burger{display:block}
+  .navlinks{display:none;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:#09090a;border-bottom:1px solid #262629;padding:20px;gap:15px}
+  .navlinks.open{display:flex}
+  h1{letter-spacing:-3px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">MORK</a>
+  <div class="navlinks" id="navlinks">
+    <a href="#works" onclick="closeNav()" data-i18n="nav_works">Prace</a>
+    <a href="#custom" onclick="closeNav()" data-i18n="nav_custom">Custom</a>
+    <a href="#model" onclick="closeNav()" data-i18n="nav_model">Dla Modeli</a>
+    <a href="#booking" onclick="closeNav()" data-i18n="nav_booking">Zapisy</a>
+  </div>
+  <div class="nav-right">
+    <select class="lang-select" id="langSelect" onchange="changeLang(this.value)">
+      <option value="pl" selected>PL</option>
+      <option value="en">EN</option>
+      <option value="uk">UK</option>
+      <option value="de">DE</option>
+      <option value="ru">RU</option>
+    </select>
+    <button class="burger" onclick="toggleNav()">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div>
+    <div class="eyebrow" data-i18n="hero_eyebrow">Tattoo Artist · Custom & Fine Line</div>
+    <h1>INK<br>THAT<br>FITS.</h1>
+    <p data-i18n="hero_desc">Tatuaże bez szablonowego podejścia. Wybierz gotowy projekt lub opowiedz o swoim pomyśle — pomogę go dopracować i zrealizować.</p>
+    <div class="actions">
+      <a class="btn" href="#works" data-i18n="hero_btn_works">Zobacz prace</a>
+      <a class="btn ghost" href="#custom" data-i18n="hero_btn_custom">Stwórz własny</a>
+    </div>
+  </div>
+  <div class="visual">
+    <div class="symbol">✦</div>
+    <div class="tag">FINE LINE / BLACKWORK / CUSTOM</div>
+  </div>
+</header>
+
+<section id="works">
+  <div class="eyebrow">01 / Portfolio</div>
+  <h2 class="title" data-i18n="works_title">Prace</h2>
+  <div class="filters">
+    <button class="filter active" onclick="filterWorks('all', this)" data-i18n="filter_all">Wszystkie</button>
+    <button class="filter" onclick="filterWorks('fine', this)">Fine line</button>
+    <button class="filter" onclick="filterWorks('black', this)">Blackwork</button>
+    <button class="filter" onclick="filterWorks('minimal', this)">Minimal</button>
+  </div>
+  <div class="grid" id="gallery"></div>
+</section>
+
+<section id="custom" class="builder">
+  <div class="eyebrow">02 / Custom</div>
+  <h2 class="title" data-i18n="custom_title">Zrób tatuaż dla siebie</h2>
+  <div class="two">
+    <div>
+      <div class="field">
+        <label data-i18n="label_idea">Twój pomysł</label>
+        <textarea id="customIdea" rows="4" data-i18n-ph="ph_idea" placeholder="Np. wąż wokół gałązki, cienkie linie..."></textarea>
+      </div>
+      <div class="field">
+        <label data-i18n="label_size">Rozmiar</label>
+        <select id="customSize" onchange="updateEstimate()">
+          <option value="150" data-i18n="size_1">do 5 cm (od 150 zł)</option>
+          <option value="250" selected data-i18n="size_2">5–10 cm (od 250 zł)</option>
+          <option value="400" data-i18n="size_3">10–20 cm (od 400 zł)</option>
+          <option value="600" data-i18n="size_4">20+ cm (od 600 zł)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="label_style">Styl</label>
+        <select id="customStyle">
+          <option value="Fine line">Fine line</option>
+          <option value="Blackwork">Blackwork</option>
+          <option value="Minimal">Minimal</option>
+          <option value="Nie wiem — pomóż wybrać" data-i18n="style_help">Nie wiem — pomóż wybrać</option>
+        </select>
+      </div>
+      <div class="field">
+        <label data-i18n="label_date">Preferowana data</label>
+        <input type="date" id="customDate">
+      </div>
+    </div>
+    <div class="estimate">
+      <div>
+        <div class="eyebrow" data-i18n="est_eyebrow">Szacowany koszt</div>
+        <div class="num" id="estimate">od 250 zł</div>
+        <p class="muted" data-i18n="est_note">To orientacyjna cena. Ostateczny koszt potwierdzamy po omówieniu szczegółów.</p>
+      </div>
+      <button class="btn" onclick="applyCustomToBooking()" data-i18n="btn_to_booking">Przejdź do zapisów →</button>
+    </div>
+  </div>
+</section>
+
+<section id="model" class="model-section">
+  <div class="eyebrow">03 / Project Model</div>
+  <h2 class="title" data-i18n="model_title">Poszukuję modeli</h2>
+  <div class="two">
+    <div class="model-card">
+      <div>
+        <h3 style="margin-top:0; font-size:24px" data-i18n="model_card_title">Tatuaż w specjalnej cenie</h3>
+        <p class="muted" data-i18n="model_card_desc">Regularnie poszukuję modeli do przetestowania nowych projektów, technik i stylów. Płacisz tylko за materiały.</p>
+        <ul class="muted" style="padding-left:20px; line-height:1.8">
+          <li data-i18n="model_li1">Gotowe autorskie projekty tatuażysty</li>
+          <li data-i18n="model_li2">Rabat do 50-70% wartości</li>
+          <li data-i18n="model_li3">Wymagana zgoda na zdjęcia / wideo</li>
+        </ul>
+      </div>
+      <button class="btn accent" onclick="applyAsModel()" style="margin-top:20px" data-i18n="model_btn">Zgłoś się jako model</button>
+    </div>
+    <div class="card" style="justify-content:center; align-items:center; text-align:center;">
+      <div style="font-size:60px; margin-bottom:15px">📸</div>
+      <h3 data-i18n="model_info_title">Chcesz wypróbować coś nowego?</h3>
+      <p class="muted" data-i18n="model_info_text">Napisz w komentarzu przy zapisie, jaki styl Cię interesuje, a zaproponuję dostępne projekty dla modeli.</p>
+    </div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="eyebrow">04 / Booking</div>
+  <h2 class="title" data-i18n="booking_title">Zapisy</h2>
+  <div class="two">
+    <div class="card">
+      <div>
+        <h3 data-i18n="book_subtitle">Co wybieramy?</h3>
+        <p class="muted" id="selected" style="font-weight:700; color:#d85a73; margin-bottom:15px;">Indywidualny projekt</p>
+        <div class="field">
+          <label data-i18n="label_name">Imię *</label>
+          <input id="name" data-i18n-ph="ph_name" placeholder="Jak się do Ciebie zwracać?">
+        </div>
+        <div class="field">
+          <label data-i18n="label_contact">Kontakt (Telegram / Instagram / Tel) *</label>
+          <input id="contact" data-i18n-ph="ph_contact" placeholder="@username lub numer telefonu">
+        </div>
+        <div class="field">
+          <label data-i18n="label_comment">Komentarz / Uwagi</label>
+          <textarea id="comment" rows="4" data-i18n-ph="ph_comment" placeholder="Dodatkowe życzenia lub opis pomysłu"></textarea>
+        </div>
+      </div>
+      <button class="btn" onclick="submitBooking()" style="margin-top:15px" data-i18n="btn_submit">Wyślij zgłoszenie</button>
+    </div>
+    <div class="card">
+      <h3 data-i18n="steps_title">Jak to działa?</h3>
+      <p class="muted" style="line-height:2">
+        <b style="color:#fff">01</b> — <span data-i18n="step1">Wysyłasz zgłoszenie przez formularz</span><br>
+        <b style="color:#fff">02</b> — <span data-i18n="step2">Otrzymuję wiadomość bezpośrednio na Telegram</span><br>
+        <b style="color:#fff">03</b> — <span data-i18n="step3">Omawiamy szkic, szczegóły oraz wycenę</span><br>
+        <b style="color:#fff">04</b> — <span data-i18n="step4">Wybieramy dogodny termin</span><br>
+        <b style="color:#fff">05</b> — <span data-i18n="step5">Spotykamy się na sesję tatuażu</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>MORK · Tattoo Artist</div>
+  <div data-i18n="footer_rights">Wszelkie prawa zastrzeżone</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ==========================================
+const i18n = {
+  pl: {
+    nav_works: "Prace", nav_custom: "Custom", nav_model: "Dla Modeli", nav_booking: "Zapisy",
+    hero_eyebrow: "Tattoo Artist · Custom & Fine Line",
+    hero_desc: "Tatuaże bez szablonowego podejścia. Wybierz gotowy projekt lub opowiedz o swoim pomyśle — pomogę go dopracować i zrealizować.",
+    hero_btn_works: "Zobacz prace", hero_btn_custom: "Stwórz własny",
+    works_title: "Prace", filter_all: "Wszystkie",
+    custom_title: "Zrób tatuaż dla siebie", label_idea: "Twój pomysł", ph_idea: "Np. wąż wokół gałązki, cienkie linie...",
+    label_size: "Rozmiar", size_1: "do 5 cm (od 150 zł)", size_2: "5–10 cm (od 250 zł)", size_3: "10–20 cm (od 400 zł)", size_4: "20+ cm (od 600 zł)",
+    label_style: "Styl", style_help: "Nie wiem — pomóż wybrać", label_date: "Preferowana data",
+    est_eyebrow: "Szacowany koszt", est_note: "To orientacyjna cena. Ostateczny koszt potwierdzamy po omówieniu szczegółów.", btn_to_booking: "Przejdź do zapisów →",
+    model_title: "Poszukuję modeli", model_card_title: "Tatuaż w specjalnej cenie",
+    model_card_desc: "Regularnie poszukuję modeli do przetestowania nowych projektów, technik i stylów. Płacisz tylko za materiały.",
+    model_li1: "Gotowe autorskie projekty tatuażysty", model_li2: "Rabat do 50-70% wartości", model_li3: "Wymagana zgoda na zdjęcia / wideo",
+    model_btn: "Zgłoś się jako model", model_info_title: "Chcesz wypróbować coś nowego?",
+    model_info_text: "Napisz w komentarzu przy zapisie, jaki styl Cię interesuje, a zaproponuję dostępne projekty dla modeli.",
+    booking_title: "Zapisy", book_subtitle: "Co wybieramy?", label_name: "Imię *", ph_name: "Jak się do Ciebie zwracać?",
+    label_contact: "Kontakt (Telegram / Instagram / Tel) *", ph_contact: "@username lub numer telefonu",
+    label_comment: "Komentarz / Uwagi", ph_comment: "Dodatkowe życzenia lub opis pomysłu", btn_submit: "Wyślij zgłoszenie",
+    steps_title: "Jak to działa?", step1: "Wysyłasz zgłoszenie przez formularz", step2: "Otrzymuję wiadomość bezpośrednio na Telegram",
+    step3: "Omawiamy szkic, szczegóły oraz wycenę", step4: "Wybieramy dogodny termin", step5: "Spotykamy się na sesję tatuażu",
+    footer_rights: "Wszelkie prawa zastrzeżone", choose_btn: "Wybierz projekt", model_selected_text: "Zgłoszenie na MODELA (Specjalna cena)"
+  },
+  en: {
+    nav_works: "Works", nav_custom: "Custom", nav_model: "For Models", nav_booking: "Booking",
+    hero_eyebrow: "Tattoo Artist · Custom & Fine Line",
+    hero_desc: "Custom tattoos tailored to you. Choose an available design or share your idea — I will help bring it to life.",
+    hero_btn_works: "View Portfolio", hero_btn_custom: "Custom Design",
+    works_title: "Portfolio", filter_all: "All",
+    custom_title: "Get a Custom Tattoo", label_idea: "Your Idea", ph_idea: "E.g. snake around a branch, fine lines...",
+    label_size: "Size", size_1: "up to 5 cm (from 150 zł)", size_2: "5–10 cm (from 250 zł)", size_3: "10–20 cm (from 400 zł)", size_4: "20+ cm (from 600 zł)",
+    label_style: "Style", style_help: "Not sure — help me choose", label_date: "Preferred Date",
+    est_eyebrow: "Estimated Price", est_note: "Estimated price only. Final cost will be confirmed after discussion.", btn_to_booking: "Proceed to Booking →",
+    model_title: "Looking for Models", model_card_title: "Tattoo at a Special Price",
+    model_card_desc: "I regularly look for models to practice new styles and designs. You only pay for materials.",
+    model_li1: "Original artist flash designs", model_li2: "Up to 50-70% discount", model_li3: "Consent for photos/videos required",
+    model_btn: "Apply as a Model", model_info_title: "Want to try something new?",
+    model_info_text: "Let me know in the comments which style interests you, and I will share available model designs.",
+    booking_title: "Booking", book_subtitle: "Selection", label_name: "Name *", ph_name: "How should I call you?",
+    label_contact: "Contact (Telegram / Instagram / Phone) *", ph_contact: "@username or phone number",
+    label_comment: "Comments / Details", ph_comment: "Additional wishes or design description", btn_submit: "Send Booking Request",
+    steps_title: "How it works", step1: "You submit a booking request", step2: "I receive your message directly on Telegram",
+    step3: "We discuss the sketch, details and pricing", step4: "We set a convenient date", step5: "We meet for the tattoo session",
+    footer_rights: "All rights reserved", choose_btn: "Select Design", model_selected_text: "Application for MODEL (Special price)"
+  },
+  uk: {
+    nav_works: "Роботи", nav_custom: "Custom", nav_model: "Моделям", nav_booking: "Запис",
+    hero_eyebrow: "Tattoo Artist · Custom & Fine Line",
+    hero_desc: "Татуювання без шаблонного підходу. Обирай готовий ескіз або розкажи ідею — я допоможу втілити її в життя.",
+    hero_btn_works: "Дивитись роботи", hero_btn_custom: "Створити свій",
+    works_title: "Роботи", filter_all: "Усі",
+    custom_title: "Тату під тебе", label_idea: "Твоя ідея", ph_idea: "Наприклад: змія навколо гілки, тонкі лінії...",
+    label_size: "Розмір", size_1: "до 5 см (від 150 zł)", size_2: "5–10 см (від 250 zł)", size_3: "10–20 см (від 400 zł)", size_4: "20+ см (від 600 zł)",
+    label_style: "Стиль", style_help: "Не знаю — допоможи обрати", label_date: "Бажана дата",
+    est_eyebrow: "Попередня оцінка", est_note: "Це орієнтовна вартість. Фінальна ціна підтверджується після обговорення.", btn_to_booking: "Перейти до запису →",
+    model_title: "Шукаю моделей", model_card_title: "Тату за спеціальною ціною",
+    model_card_desc: "Регулярно шукаю моделей для відпрацювання нових стилів та ескізів. Оплата лише за матеріали.",
+    model_li1: "Готові авторські ескізи майстра", model_li2: "Знижка до 50-70% від вартості", model_li3: "Згода на фото/відео зйомку",
+    model_btn: "Подати заявку як модель", model_info_title: "Хочеш спробувати щось нове?",
+    model_info_text: "Вкажи в коментарі при записі, який стиль тебецікавить, і я запропоную вільні варіанти.",
+    booking_title: "Запис", book_subtitle: "Що обираємо?", label_name: "Ім'я *", ph_name: "Як до вас звертатися?",
+    label_contact: "Контакт (Telegram / Instagram / Тел) *", ph_contact: "@username або номер телефону",
+    label_comment: "Коментар / Побажання", ph_comment: "Додаткові побажання чи опис ідеї", btn_submit: "Надіслати заявку",
+    steps_title: "Як все відбувається?", step1: "Залишаєш заявку на сайті", step2: "Я отримую повідомлення прямо в Telegram",
+    step3: "Узгоджуємо ескіз, деталі та вартість", step4: "Обираємо зручну дату", step5: "Зустрічаємось на сеанс татуювання",
+    footer_rights: "Усі права захищені", choose_btn: "Обрати ескіз", model_selected_text: "Заявка на МОДЕЛЬ (Спеціальна ціна)"
+  },
+  de: {
+    nav_works: "Arbeiten", nav_custom: "Custom", nav_model: "Für Modelle", nav_booking: "Termin",
+    hero_eyebrow: "Tattoo Artist · Custom & Fine Line",
+    hero_desc: "Individuelle Tattoos ohne Vorlagen. Wähle ein Design oder teile deine Idee mit mir.",
+    hero_btn_works: "Portfolio ansehen", hero_btn_custom: "Eigenes Design",
+    works_title: "Arbeiten", filter_all: "Alle",
+    custom_title: "Dein Wunsch-Tattoo", label_idea: "Deine Idee", ph_idea: "Z.B. Schlange um einen Zweig, feine Linien...",
+    label_size: "Größe", size_1: "bis 5 cm (ab 150 zł)", size_2: "5–10 cm (ab 250 zł)", size_3: "10–20 cm (ab 400 zł)", size_4: "20+ cm (ab 600 zł)",
+    label_style: "Stil", style_help: "Weiß nicht — bitte beraten", label_date: "Wunschtermin",
+    est_eyebrow: "Geschätzter Preis", est_note: "Unverbindlicher Richtpreis. Endpreis wird nach Besprechung bestätigt.", btn_to_booking: "Weiter zur Buchung →",
+    model_title: "Modelle Gesucht", model_card_title: "Tattoo zum Spezialpreis",
+    model_card_desc: "Ich suche regelmäßig Modelle für neue Techniken und Stile. Du zahlst nur Materialkosten.",
+    model_li1: "Exklusive Wannado-Designs", model_li2: "Bis zu 50-70% Rabatt", model_li3: "Einwilligung für Fotos/Videos erforderlich",
+    model_btn: "Als Modell bewerben", model_info_title: "Lust auf etwas Neues?",
+    model_info_text: "Schreib mir bei der Buchung, welcher Stil dich interessiert.",
+    booking_title: "Terminvereinbarung", book_subtitle: "Auswahl", label_name: "Name *", ph_name: "Wie darf ich dich nennen?",
+    label_contact: "Kontakt (Telegram / Instagram / Tel) *", ph_contact: "@username oder Telefonnummer",
+    label_comment: "Anmerkungen", ph_comment: "Zusätzliche Wünsche oder Details", btn_submit: "Anfrage Absenden",
+    steps_title: "Ablauf", step1: "Du sendest die Anfrage ab", step2: "Ich erhalte sie direkt per Telegram",
+    step3: "Wir besprechen Motiv und Preis", step4: "Wir vereinbaren einen Termin", step5: "Tattoo-Session findet statt",
+    footer_rights: "Alle Rechte vorbehalten", choose_btn: "Motiv wählen", model_selected_text: "Bewerbung als MODELL (Sonderpreis)"
+  },
+  ru: {
+    nav_works: "Работы", nav_custom: "Custom", nav_model: "Моделям", nav_booking: "Запись",
+    hero_eyebrow: "Tattoo Artist · Custom & Fine Line",
+    hero_desc: "Татуировки без шаблонного подхода. Выбирай готовый эскиз или расскажи идею — я помогу воплотить её в жизнь.",
+    hero_btn_works: "Смотреть работы", hero_btn_custom: "Создать свою",
+    works_title: "Работы", filter_all: "Все",
+    custom_title: "Сделай тату под себя", label_idea: "Твоя идея", ph_idea: "Например: змея вокруг ветки, тонкие линии...",
+    label_size: "Размер", size_1: "до 5 см (от 150 zł)", size_2: "5–10 см (от 250 zł)", size_3: "10–20 см (от 400 zł)", size_4: "20+ см (от 600 zł)",
+    label_style: "Стиль", style_help: "Не знаю — помогите выбрать", label_date: "Желаемая дата",
+    est_eyebrow: "Предварительная оценка", est_note: "Это ориентировочная стоимость. Финальная цена подтверждается после обсуждения.", btn_to_booking: "Перейти к записи →",
+    model_title: "Ищу моделей", model_card_title: "Тату по специальной цене",
+    model_card_desc: "Регулярно ищу моделей для отработки новых стилей и эскизов. Оплата только за материалы.",
+    model_li1: "Готовые авторские эскизы мастера", model_li2: "Скидка до 50-70% от стоимости", model_li3: "Согласие на фото/видео съемку",
+    model_btn: "Подать заявку как модель", model_info_title: "Хочешь попробовать что-то новое?",
+    model_info_text: "Укажи в комментарии при записи, какой стиль тебя интересует, и я предложу свободные эскизы.",
+    booking_title: "Запись", book_subtitle: "Что выбираем?", label_name: "Имя *", ph_name: "Как к вам обращаться?",
+    label_contact: "Контакт (Telegram / Instagram / Тел) *", ph_contact: "@username или номер телефона",
+    label_comment: "Комментарий / Пожелания", ph_comment: "Дополнительные пожелания или описание идеи", btn_submit: "Отправить заявку",
+    steps_title: "Как всё происходит?", step1: "Оставляешь заявку на сайте", step2: "Я получаю сообщение прямо в Telegram",
+    step3: "Согласовываем эскиз, детали и стоимость", step4: "Выбираем удобную дату", step5: "Встречаемся на сеанс татуировки",
+    footer_rights: "Все права защищены", choose_btn: "Выбрать эскиз", model_selected_text: "Заявка на МОДЕЛЬ (Специальная цена)"
+  }
+};
+
+let currentLang = 'pl';
+
+function changeLang(lang) {
+  currentLang = lang;
+  const t = i18n[lang];
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.textContent = t[key];
+  });
+
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    if (t[key]) el.placeholder = t[key];
+  });
+
+  renderGallery();
+}
+
+// --- Данные Галереи ---
+const worksData = [
+  { id: 1, title: "Moon line", style: "fine", desc: "Fine Line · 7 cm", price: "250", symbol: "☾" },
+  { id: 2, title: "Black wings", style: "black", desc: "Blackwork · 12 cm", price: "450", symbol: "𓆩𓆪" },
+  { id: 3, title: "Orbit", style: "minimal", desc: "Minimal · 5 cm", price: "180", symbol: "✺" }
+];
+
+let currentFilter = 'all';
+
+function renderGallery() {
+  const container = document.getElementById('gallery');
+  container.innerHTML = '';
+  const filtered = worksData.filter(w => currentFilter === 'all' || w.style === currentFilter);
+
+  filtered.forEach(w => {
+    const card = document.createElement('div');
+    card.className = 'card work';
+    card.innerHTML = `
+      <div>
+        <div class="preview">${w.symbol}</div>
+        <h3>${w.title}</h3>
+        <p class="muted">${w.desc}</p>
+      </div>
+      <div>
+        <div class="price">od ${w.price} zł</div>
+        <button class="btn" style="width:100%" onclick="chooseWork('${w.title}', '${w.price}')">${i18n[currentLang].choose_btn}</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function filterWorks(style, btn) {
+  document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = style;
+  renderGallery();
+}
+
+function chooseWork(title, price) {
+  document.getElementById('selected').textContent = `Sketch: "${title}" (od ${price} zł)`;
+  location.hash = 'booking';
+  toast('OK!');
+}
+
+function updateEstimate() {
+  const val = document.getElementById('customSize').value;
+  document.getElementById('estimate').textContent = 'od ' + val + ' zł';
+}
+
+function applyCustomToBooking() {
+  const idea = document.getElementById('customIdea').value.trim();
+  const sizeSelect = document.getElementById('customSize');
+  const sizeText = sizeSelect.options[sizeSelect.selectedIndex].text;
+  const styleText = document.getElementById('customStyle').value;
+  const dateVal = document.getElementById('customDate').value;
+  const price = document.getElementById('estimate').textContent;
+
+  document.getElementById('selected').textContent = `Custom: ${styleText} (${price})`;
+
+  let comment = `Custom Tattoo:\n- Size: ${sizeText}\n- Style: ${styleText}`;
+  if (idea) comment += `\n- Idea: ${idea}`;
+  if (dateVal) comment += `\n- Date: ${dateVal}`;
+
+  document.getElementById('comment').value = comment;
+  location.hash = 'booking';
+  toast('OK!');
+}
+
+function applyAsModel() {
+  document.getElementById('selected').textContent = i18n[currentLang].model_selected_text;
+  document.getElementById('comment').value = "Chcę zgłosić się jako MODEL / Модель / Model request.";
+  location.hash = 'booking';
+  toast('OK!');
+}
+
+// --- Отправка в Telegram ---
+async function submitBooking() {
+  const name = document.getElementById('name').value.trim();
+  const contact = document.getElementById('contact').value.trim();
+  const comment = document.getElementById('comment').value.trim();
+  const service = document.getElementById('selected').textContent;
+
+  if (!name || !contact) {
+    toast(currentLang === 'pl' ? 'Wypełnij wymagane pola!' : 'Заполните обязательные поля!');
+    return;
+  }
+
+// Собираем данные формы для отправки на Cloudflare Worker
+  const payload = {
+    name: name,
+    contact: contact,
+    service: service,
+    lang: typeof currentLang !== 'undefined' ? currentLang.toUpperCase() : 'PL',
+    comment: comment || ''
+  };
+
+  // Тексты всплывающих уведомлений для каждого языка
+  const toastMessages = {
+    pl: {
+      success: 'Wysłano pomyślnie!',
+      error: 'Błąd podczas wysyłania wiadomości!',
+      connError: 'Błąd połączenia z siecią!'
+    },
+    en: {
+      success: 'Sent successfully!',
+      error: 'Error sending message!',
+      connError: 'Network connection error!'
+    },
+    ru: {
+      success: 'Заявка успешно отправлена!',
+      error: 'Ошибка при отправке сообщения!',
+      connError: 'Ошибка сетевого соединения!'
+    }
+  };
+
+  // Определяем активный язык (если язык неизвестен, берем 'pl')
+  const activeLang = (typeof currentLang !== 'undefined' && toastMessages[currentLang]) ? currentLang : 'pl';
+
+  try {
+    const res = await fetch("https://withered-shape-cd29.lyhsnikov1423.workers.dev", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      toast(toastMessages[activeLang].success);
+      if (document.getElementById('name')) document.getElementById('name').value = '';
+      if (document.getElementById('contact')) document.getElementById('contact').value = '';
+      if (document.getElementById('comment')) document.getElementById('comment').value = '';
+    } else {
+      toast(toastMessages[activeLang].error);
+    }
+  } catch (err) {
+    console.error(err);
+    toast(toastMessages[activeLang].connError);
+  }
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => { t.style.display = 'none'; }, 2500);
+}
+
+function toggleNav() { document.getElementById('navlinks').classList.toggle('open'); }
+function closeNav() { document.getElementById('navlinks').classList.remove('open'); }
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderGallery();
+});
+</script>
+</body>
+</html>
