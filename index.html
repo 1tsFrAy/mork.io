@@ -73,6 +73,53 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
   .navlinks{display:none;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:#09090a;border-bottom:1px solid #262629;padding:20px;gap:15px}
   .navlinks.open{display:flex}
   h1{letter-spacing:-3px}
+  }
+  /* Стили для интерактивной кнопки в футере */
+.legal-link {
+  background: none;
+  border: none;
+  color: #777;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.legal-link:hover {
+  color: #fff;
+}
+
+/* Стили всплывающего окна */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-card {
+  background: #141416;
+  border: 1px solid #2a2a2e;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  color: #ececec;
+}
+.modal-close {
+  position: absolute;
+  top: 15px; right: 20px;
+  background: none; border: none;
+  color: #888; font-size: 24px; cursor: pointer;
+}
+.modal-close:hover { color: #fff; }
 }
 </style>
 </head>
@@ -203,6 +250,8 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
         <p class="muted" id="selected" style="font-weight:700; color:#d85a73; margin-bottom:15px;">Indywidualny projekt</p>
         <div class="field">
           <label data-i18n="label_name">Imię *</label>
+          <!-- Поле-ловушка для спам-ботов (невидимо для человека) -->
+<input type="text" id="website_honeypot" style="display:none !important;" tabindex="-1" autocomplete="off">
           <input id="name" data-i18n-ph="ph_name" placeholder="Jak się do Ciebie zwracać?">
         </div>
         <div class="field">
@@ -230,8 +279,26 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
 </section>
 
 <footer>
-  <div>MORK · Tattoo Artist</div>
-  <div data-i18n="footer_rights">Wszelkie prawa zastrzeżone</div>
+ <footer>
+  <p>
+    © 2026 MORK Tattoo. 
+    <button type="button" class="legal-link" onclick="toggleModal(true)" data-i18n="footer_rights">
+      Wszelkie prawa zastrzeżone ✦ Legal Info
+    </button>
+  </p>
+</footer>
+
+<!-- Всплывающее модальное окно -->
+<div id="legalModal" class="modal-overlay" onclick="if(event.target === this) toggleModal(false)">
+  <div class="modal-card">
+    <button class="modal-close" onclick="toggleModal(false)">&times;</button>
+    <h3 style="margin-top:0;" data-i18n="legal_title">Informacje Prawne & RODO</h3>
+    <p style="font-size:14px; line-height:1.6; color:#aaa; white-space: pre-line;" data-i18n="legal_text">
+      Wszelkie prawa autorskie do przedstawionych szkiców i zdjęć należą do MORK Tattoo.
+
+      Wysyłając formularz, wyrażasz zgodę na przetwarzanie danych osobowych (imię, kontakt) wyłącznie w celu kontaktu w sprawie sesji.
+    </p>
+  </div>
 </footer>
 
 <div class="toast" id="toast"></div>
@@ -240,6 +307,9 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
 // ==========================================
 const i18n = {
   pl: {
+    footer_rights: "Wszelkie prawa zastrzeżone ✦ Informacje prawne",
+    legal_title: "Informacje Prawne & RODO",
+    legal_text: "Wszelkie prawa autorskie do przedstawionych szkiców i zdjęć należą do MORK Tattoo.\n\nWysyłając formularz, wyrażasz zgodę na przetwarzanie danych osobowych (imię, kontakt) wyłącznie w celu kontaktu w sprawie sesji."
     nav_works: "Prace", nav_custom: "Custom", nav_model: "Dla Modeli", nav_booking: "Zapisy",
     hero_eyebrow: "Tattoo Artist · Custom & Fine Line",
     hero_desc: "Tatuaże bez szablonowego podejścia. Wybierz gotowy projekt lub opowiedz o swoim pomyśle — pomogę go dopracować i zrealizować.",
@@ -262,6 +332,9 @@ const i18n = {
     footer_rights: "Wszelkie prawa zastrzeżone", choose_btn: "Wybierz projekt", model_selected_text: "Zgłoszenie na MODELA (Specjalna cena)"
   },
   en: {
+    footer_rights: "All rights reserved ✦ Legal Info",
+    legal_title: "Legal Info & GDPR",
+    legal_text: "All copyrights for the presented sketches and photos belong to MORK Tattoo.\n\nBy submitting the booking form, you agree to the processing of personal data (name, contact) solely for session-related communication."
     nav_works: "Works", nav_custom: "Custom", nav_model: "For Models", nav_booking: "Booking",
     hero_eyebrow: "Tattoo Artist · Custom & Fine Line",
     hero_desc: "Custom tattoos tailored to you. Choose an available design or share your idea — I will help bring it to life.",
@@ -284,6 +357,9 @@ const i18n = {
     footer_rights: "All rights reserved", choose_btn: "Select Design", model_selected_text: "Application for MODEL (Special price)"
   },
   uk: {
+    footer_rights: "Усі права захищені ✦ Правова інформація",
+    legal_title: "Правова інформація та RODO",
+    legal_text: "Усі авторські права на представлені ескізи та фотографії належать MORK Tattoo.\n\nНадсилаючи форму запису, ви погоджуєтеся на обробку персональних даних (ім'я, контакт) виключно для зв'язку щодо сеансу."
     nav_works: "Роботи", nav_custom: "Custom", nav_model: "Моделям", nav_booking: "Запис",
     hero_eyebrow: "Tattoo Artist · Custom & Fine Line",
     hero_desc: "Татуювання без шаблонного підходу. Обирай готовий ескіз або розкажи ідею — я допоможу втілити її в життя.",
@@ -306,6 +382,9 @@ const i18n = {
     footer_rights: "Усі права захищені", choose_btn: "Обрати ескіз", model_selected_text: "Заявка на МОДЕЛЬ (Спеціальна ціна)"
   },
   de: {
+    footer_rights: "Alle Rechte vorbehalten ✦ Rechtliche Hinweise",
+    legal_title: "Rechtliche Hinweise & DSGVO",
+    legal_text: "Alle Urheberrechte an den gezeigten Skizzen und Fotos liegen bei MORK Tattoo.\n\nMit dem Absenden des Formulars stimmen Sie der Verarbeitung personenbezogener Daten (Name, Kontakt) ausschließlich zum Zweck der Kontaktaufnahme bezüglich des Termins zu."
     nav_works: "Arbeiten", nav_custom: "Custom", nav_model: "Für Modelle", nav_booking: "Termin",
     hero_eyebrow: "Tattoo Artist · Custom & Fine Line",
     hero_desc: "Individuelle Tattoos ohne Vorlagen. Wähle ein Design oder teile deine Idee mit mir.",
@@ -328,6 +407,9 @@ const i18n = {
     footer_rights: "Alle Rechte vorbehalten", choose_btn: "Motiv wählen", model_selected_text: "Bewerbung als MODELL (Sonderpreis)"
   },
   ru: {
+    footer_rights: "Все права защищены ✦ Правовая информация",
+    legal_title: "Правовая информация и RODO",
+    legal_text: "Все авторские права на представленные эскизы и фотографии принадлежат MORK Tattoo.\n\nОтправляя форму записи, вы соглашаетесь на обработку персональных данных (имя, контакт) исключительно для связи по поводу сеанса."
     nav_works: "Работы", nav_custom: "Custom", nav_model: "Моделям", nav_booking: "Запись",
     hero_eyebrow: "Tattoo Artist · Custom & Fine Line",
     hero_desc: "Татуировки без шаблонного подхода. Выбирай готовый эскиз или расскажи идею — я помогу воплотить её в жизнь.",
@@ -448,6 +530,13 @@ function applyAsModel() {
 
 // --- Отправка в Telegram ---
 async function submitBooking() {
+  // 1. Проверка ловушки для ботов
+  const honeypot = document.getElementById('website_honeypot').value;
+  if (honeypot !== "") {
+    toast('Zgłoszenie wysłane!');
+    return;
+  }
+
   const name = document.getElementById('name').value.trim();
   const contact = document.getElementById('contact').value.trim();
   const comment = document.getElementById('comment').value.trim();
