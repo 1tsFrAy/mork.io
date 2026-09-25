@@ -121,6 +121,49 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
 }
 .modal-close:hover { color: #fff; }
 }
+  /* Стили для кнопки в футере */
+.legal-link {
+  background: none;
+  border: none;
+  color: #777;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+}
+.legal-link:hover { color: #fff; }
+
+/* Стили всплывающего окна */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.active {
+  display: flex !important;
+}
+.modal-card {
+  background: #141416;
+  border: 1px solid #2a2a2e;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  color: #ececec;
+}
+.modal-close {
+  position: absolute;
+  top: 15px; right: 20px;
+  background: none; border: none;
+  color: #888; font-size: 24px; cursor: pointer;
+}
+.modal-close:hover { color: #fff; }
 </style>
 </head>
 <body>
