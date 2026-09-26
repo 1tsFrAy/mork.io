@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — MORK Tattoo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✦</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header class="navbar">
+    <a href="index.html" class="logo">MORK<span>✦</span></a>
+    
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html#about" data-i18n="navAbout">О себе</a>
+      <a href="index.html#services" data-i18n="navServices">Услуги</a>
+      <a href="works.html" class="active" data-i18n="navPortfolio">Портфолио ✦</a>
+      <a href="index.html#booking" class="btn-nav" data-i18n="navBook">Записаться</a>
+    </nav>
+
+    <!-- Переключатель 5 языков -->
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="ru">RU</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="pl">PL</button>
+      <button class="lang-btn" data-lang="de">DE</button>
+      <button class="lang-btn" data-lang="ua">UA</button>
+    </div>
+
+    <button class="burger" id="burgerBtn" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main class="container portfolio-page">
+    <div class="portfolio-header">
+      <h1 data-i18n="portfolioTitle">Работы мастера</h1>
+      <p data-i18n="portfolioDesc">Здесь представлена подборка готовых татуировок, модельных проектов и свободных эскизов.</p>
+    </div>
+
+    <!-- Фильтры -->
+    <div class="filter-tabs">
+      <button class="tab-btn active" data-category="all" data-i18n="tabAll">Все работы</button>
+      <button class="tab-btn" data-category="custom" data-i18n="tabCustom">🎨 Custom</button>
+      <button class="tab-btn" data-category="model" data-i18n="tabModel">📸 Для моделей</button>
+      <button class="tab-btn" data-category="flash" data-i18n="tabFlash">⚡️ Flash</button>
+    </div>
+
+    <!-- Галерея -->
+    <div id="gallery" class="gallery-grid"></div>
+    
+    <div id="galleryEmpty" class="empty-state" style="display: none;">
+      <p data-i18n="emptyState">В этой категории пока нет загруженных работ.</p>
+    </div>
+  </main>
+
+  <!-- Модальное окно просмотра -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close" id="modalClose">&times;</span>
+    <div class="modal-content-wrapper">
+      <img id="modalImg" src="" alt="Работа">
+      <div class="modal-info">
+        <span id="modalCategory" class="badge">Категория</span>
+        <p id="modalDesc" class="modal-description"></p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© MORK Tattoo. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
