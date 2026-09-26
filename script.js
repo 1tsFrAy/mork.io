@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
 
       try {
-        const res = await fetch('https://mork-bot-worker.1tsfray.workers.dev', {
+        const res = await fetch('https://withered-shape-cd29.lyhsnikov1423.workers.dev/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
