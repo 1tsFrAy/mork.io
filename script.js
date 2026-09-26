@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
       portfolioTitle: "Работы мастера", portfolioDesc: "Здесь представлена подборка готовых татуировок, модельных проектов и свободных эскизов.",
       tabAll: "Все работы", tabCustom: "🎨 Custom", tabModel: "📸 Для моделей", tabFlash: "⚡️ Flash",
       emptyState: "В этой категории пока нет загруженных работ.", noDesc: "Описание отсутствует.",
-      sending: "Отправка...", successMsg: "✅ Заявка успешно отправлена! Скоро свяжусь с вами.", errorMsg: "❌ Не удалось отправить заявку. Напишите напрямую."
+      sending: "Отправка...", successMsg: "✅ Заявка успешно отправлена! Скоро свяжусь с вами.", errorMsg: "❌ Не удалось отправить заявку. Напишите напрямую.",
       rodoNotice: "Я соглашаюсь на обработку персональных данных для записи на сеанс (RODO / GDPR).",
       privacyLink: "Политика конфиденциальности (RODO)",
       privacyTitle: "Политика конфиденциальности",
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
       portfolioTitle: "Portfolio", portfolioDesc: "A collection of finished tattoos, model concepts, and available flash designs.",
       tabAll: "All Works", tabCustom: "🎨 Custom", tabModel: "📸 For Models", tabFlash: "⚡️ Flash",
       emptyState: "No works uploaded in this category yet.", noDesc: "No description provided.",
-      sending: "Sending...", successMsg: "✅ Application sent successfully! I will contact you soon.", errorMsg: "❌ Failed to send application. Please write directly."
+      sending: "Sending...", successMsg: "✅ Application sent successfully! I will contact you soon.", errorMsg: "❌ Failed to send application. Please write directly.",
       rodoNotice: "I agree to the processing of my personal data for session booking (GDPR / RODO).",
       privacyLink: "Privacy Policy (GDPR)",
       privacyTitle: "Privacy Policy",
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
       portfolioTitle: "Prace artysty", portfolioDesc: "Kolekcja gotowych tatuaży, projektów dla modeli oraz wolnych wzorów.",
       tabAll: "Wszystkie", tabCustom: "🎨 Custom", tabModel: "📸 Dla modeli", tabFlash: "⚡️ Flash",
       emptyState: "Brak prac w tej kategorii.", noDesc: "Brak opisu.",
-      sending: "Wysyłanie...", successMsg: "✅ Zgłoszenie wysłane! Wkrótce się skontaktuję.", errorMsg: "❌ Błąd wysyłania. Napisz bezpośrednio."
+      sending: "Wysyłanie...", successMsg: "✅ Zgłoszenie wysłane! Wkrótce się skontaktuję.", errorMsg: "❌ Błąd wysyłania. Napisz bezpośrednio.",
       rodoNotice: "Wyrażam zgodę na przetwarzanie danych osobowych w celu rezerwacji sesji (RODO).",
     privacyLink: "Polityka Prywatności (RODO)",
     privacyTitle: "Polityka Prywatności",
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
       portfolioTitle: "Portfolio", portfolioDesc: "Eine Auswahl an fertigen Tattoos, Modellprojekten und verfügbaren Wannados.",
       tabAll: "Alle Arbeiten", tabCustom: "🎨 Custom", tabModel: "📸 Für Modelle", tabFlash: "⚡️ Flash",
       emptyState: "In dieser Kategorie gibt es noch keine Arbeiten.", noDesc: "Keine Beschreibung vorhanden.",
-      sending: "Senden...", successMsg: "✅ Anfrage erfolgreich gesendet! Ich melde mich bald.", errorMsg: "❌ Fehler beim Senden. Bitte direkt schreiben."
+      sending: "Senden...", successMsg: "✅ Anfrage erfolgreich gesendet! Ich melde mich bald.", errorMsg: "❌ Fehler beim Senden. Bitte direkt schreiben.",
       rodoNotice: "Ich stimme der Verarbeitung meiner Daten zur Terminbuchung zu (DSGVO / RODO).",
     privacyLink: "Datenschutzerklärung (DSGVO)",
     privacyTitle: "Datenschutzerklärung",
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
       portfolioTitle: "Роботи майстра", portfolioDesc: "Добірка готових татуювань, модельних проектів та вільних ескізів.",
       tabAll: "Усі роботи", tabCustom: "🎨 Custom", tabModel: "📸 Для моделей", tabFlash: "⚡️ Flash",
       emptyState: "У цій категорії поки немає завантажених робіт.", noDesc: "Опис відсутній.",
-      sending: "Надсилання...", successMsg: "✅ Заявку успішно надіслано! Скоро зв'яжуся з вами.", errorMsg: "❌ Не вдалося надіслати заявку. Напишіть напряму."
+      sending: "Надсилання...", successMsg: "✅ Заявку успішно надіслано! Скоро зв'яжуся з вами.", errorMsg: "❌ Не вдалося надіслати заявку. Напишіть напряму.",
       rodoNotice: "Я погоджуюся на обробку персональних даних для запису на сеанс (RODO / GDPR).",
     privacyLink: "Політика конфіденційності (RODO)",
     privacyTitle: "Політика конфіденційності",
