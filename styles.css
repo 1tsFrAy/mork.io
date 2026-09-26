@@ -371,3 +371,44 @@ footer { text-align: center; padding: 40px; border-top: 1px solid var(--border-c
   .nav-links.open { display: flex; }
   .hero h1 { font-size: 28px; }
 }
+/* RODO & Privacy Styles */
+.rodo-notice {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.rodo-notice label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.rodo-notice input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: var(--accent-gold);
+  cursor: pointer;
+}
+
+.privacy-link {
+  color: #8a8a93;
+  font-size: 12px;
+  text-decoration: underline;
+  transition: color 0.3s;
+}
+
+.privacy-link:hover {
+  color: #ffffff;
+}
+
+.privacy-card {
+  padding: 35px 25px;
+  max-width: 550px;
+  width: 90%;
+  background: #141417;
+  position: relative;
+}
