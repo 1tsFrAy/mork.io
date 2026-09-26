@@ -15,5 +15,12 @@
       "category": "model"
     }
   ],
-  "flash": []
+  "flash": [
+    {
+      "id": 1790458877736,
+      "src": "images/flash/flash_1790458877736.jpg",
+      "caption": "67766",
+      "category": "flash"
+    }
+  ]
 }
