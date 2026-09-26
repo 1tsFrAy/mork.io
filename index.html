@@ -110,6 +110,14 @@
           <div class="form-group">
             <textarea id="comment" rows="4" data-i18n-ph="commentPlaceholder" placeholder="Опишите идею, примерный размер и место нанесения..."></textarea>
           </div>
+          <!-- Чекбокс RODO -->
+<div class="rodo-notice">
+  <label>
+    <input type="checkbox" id="rodoCheck" required checked>
+    <span data-i18n="rodoNotice">Я соглашаюсь на обработку персональных данных для записи на сеанс.</span>
+  </label>
+</div>
+<button type="submit" class="btn btn-primary btn-block" id="submitBtn" data-i18n="submitBtn">Отправить заявку</button>
           <button type="submit" class="btn btn-primary btn-block" id="submitBtn" data-i18n="submitBtn">Отправить заявку</button>
           <div id="formStatus" class="form-status"></div>
         </form>
@@ -118,8 +126,19 @@
   </section>
 
   <footer>
-    <p>© MORK Tattoo. All rights reserved.</p>
-  </footer>
+    <footer>
+  <p>© MORK Tattoo. All rights reserved.</p>
+  <p><a href="#" id="privacyBtn" class="privacy-link" data-i18n="privacyLink">Polityka Prywatności (RODO)</a></p>
+</footer>
+
+<!-- Модальное окно Политики Конфиденциальности -->
+<div id="privacyModal" class="modal">
+  <div class="modal-content-wrapper privacy-card">
+    <span class="modal-close" id="privacyClose">&times;</span>
+    <h3 data-i18n="privacyTitle" style="margin-bottom: 15px;">Политика конфиденциальности</h3>
+    <p id="privacyText" data-i18n="privacyText" style="font-size: 14px; color: var(--text-secondary); line-height: 1.7;"></p>
+  </div>
+</div>
 
   <script src="script.js"></script>
 </body>
