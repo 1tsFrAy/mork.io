@@ -209,9 +209,9 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
   <h2 class="title" data-i18n="works_title">Prace</h2>
   <div class="filters">
     <button class="filter active" onclick="filterWorks('all', this)" data-i18n="filter_all">Wszystkie</button>
-    <button class="filter" onclick="filterWorks('fine', this)">Fine line</button>
-    <button class="filter" onclick="filterWorks('black', this)">Blackwork</button>
-    <button class="filter" onclick="filterWorks('minimal', this)">Minimal</button>
+    <button class="filter" onclick="filterWorks('fine', this)">Custom</button>
+    <button class="filter" onclick="filterWorks('black', this)">Flash</button>
+    <button class="filter" onclick="filterWorks('minimal', this)">Model</button>
   </div>
   <div class="grid" id="gallery"></div>
 </section>
@@ -663,6 +663,45 @@ function closeNav() { document.getElementById('navlinks').classList.remove('open
 document.addEventListener('DOMContentLoaded', () => {
   renderGallery();
 });
+  let worksData = [];
+
+// 1. Загрузка данных из works.json
+async function loadWorks() {
+  try {
+    const response = await fetch('works.json');
+    if (!response.ok) return;
+    worksData = await response.json();
+    renderGallery('all');
+  } catch (error) {
+    console.error('Ошибка загрузки галереи:', error);
+  }
+}
+
+// 2. Отрисовка картинок внутри <div id="gallery">
+function renderGallery(category) {
+  const grid = document.getElementById('gallery');
+  if (!grid) return;
+
+  const filtered = (category === 'all') 
+    ? worksData 
+    : worksData.filter(item => item.category === category);
+
+  grid.innerHTML = filtered.map(item => `
+    <div class="work-card" data-category="${item.category}">
+      <img src="${item.src}" alt="Tattoo work" loading="lazy">
+    </div>
+  `).join('');
+}
+
+// 3. Обработка кликов по кнопкам "All", "Custom", "Flash", "Model"
+function filterWorks(category, btnElement) {
+  document.querySelectorAll('.filters .filter').forEach(btn => btn.classList.remove('active'));
+  if (btnElement) btnElement.classList.add('active');
+  renderGallery(category);
+}
+
+// Автоматический запуск при открытии сайта
+document.addEventListener('DOMContentLoaded', loadWorks);
 </script>
 </body>
 </html>
