@@ -296,3 +296,4 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target === privacyModal) privacyModal.style.display = 'none';
     });
   }
+});
