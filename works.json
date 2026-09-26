@@ -1,5 +1,11 @@
 {
-  "works": [],
+  "works": [
+    {
+      "id": 1790456204422,
+      "src": "images/works/works_1790456204422.jpg",
+      "caption": ""
+    }
+  ],
   "models": [],
   "sketches": []
 }
