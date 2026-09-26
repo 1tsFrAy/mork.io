@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 4. ПОРТФОЛИО (works.html) ---
+ // --- 4. ПОРТФОЛИО (works.html) ---
   const gallery = document.getElementById('gallery');
   if (gallery) {
     let worksData = [];
@@ -312,7 +312,18 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(`works.json?_=${Date.now()}`)
       .then(res => res.json())
       .then(data => {
-        worksData = Array.isArray(data) ? data : [];
+        // Объединяем категории объекта { custom: [], model: [], flash: [] } в один массив
+        if (Array.isArray(data)) {
+          worksData = data;
+        } else if (typeof data === 'object' && data !== null) {
+          worksData = [
+            ...(data.custom || []),
+            ...(data.model || []),
+            ...(data.flash || [])
+          ];
+        } else {
+          worksData = [];
+        }
         renderGallery(worksData, 'all');
       })
       .catch(err => {
@@ -358,11 +369,15 @@ document.addEventListener('DOMContentLoaded', () => {
     filtered.forEach(item => {
       const card = document.createElement('div');
       card.className = 'gallery-card';
+      
+      // Считываем caption или description
+      const textCaption = item.caption || item.description || '';
+
       card.innerHTML = `
         <img src="${item.src}" alt="Work" loading="lazy">
         <div class="card-overlay">
           <span class="badge">${item.category || 'WORK'}</span>
-          ${item.description ? `<p style="font-size: 12px; color: #ccc;">${item.description}</p>` : ''}
+          ${textCaption ? `<p style="font-size: 12px; color: #ccc;">${textCaption}</p>` : ''}
         </div>
       `;
 
@@ -391,9 +406,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCategory = document.getElementById('modalCategory');
     const modalDesc = document.getElementById('modalDesc');
 
+    const textCaption = item.caption || item.description || '';
+
     if (modalImg) modalImg.src = item.src;
     if (modalCategory) modalCategory.innerText = (item.category || 'WORK').toUpperCase();
-    if (modalDesc) modalDesc.innerText = item.description || (translations[currentLang] ? translations[currentLang].noDesc : 'Описание отсутствует');
+    if (modalDesc) modalDesc.innerText = textCaption || (translations[currentLang] ? translations[currentLang].noDesc : 'Описание отсутствует');
     
     if (modal) modal.style.display = 'flex';
   }
