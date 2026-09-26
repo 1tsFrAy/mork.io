@@ -40,9 +40,11 @@ section{padding:80px 6%}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
 .card{background:#121214;border:1px solid #27272b;border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
 .preview{height:170px;border-radius:12px;background:#0b0b0d;display:grid;place-items:center;font-size:78px;margin-bottom:18px;user-select:none}
-.card h3{margin:5px 0 8px}
 .muted{color:#96969b;line-height:1.55}
-.price{font-size:15px;font-weight:700;color:#eee;margin:15px 0}
+
+/* Стили карточек галереи */
+.work-card{background:#121214;border:1px solid #27272b;border-radius:18px;overflow:hidden;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+.work-card img{width:100%;height:100%;object-fit:cover;display:block;border-radius:18px}
 
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
 .filter{border:1px solid #303034;background:#111114;color:#aaa;padding:9px 16px;border-radius:99px;cursor:pointer;transition:all .2s}
@@ -73,8 +75,8 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
   .navlinks{display:none;flex-direction:column;position:absolute;top:70px;left:0;right:0;background:#09090a;border-bottom:1px solid #262629;padding:20px;gap:15px}
   .navlinks.open{display:flex}
   h1{letter-spacing:-3px}
-  }
-  /* Стили для интерактивной кнопки в футере */
+}
+
 .legal-link {
   background: none;
   border: none;
@@ -85,55 +87,8 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
   font-size: 14px;
   transition: color 0.2s;
 }
-.legal-link:hover {
-  color: #fff;
-}
-
-/* Стили всплывающего окна */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-}
-.modal-overlay.active {
-  display: flex;
-}
-.modal-card {
-  background: #141416;
-  border: 1px solid #2a2a2e;
-  border-radius: 16px;
-  padding: 30px;
-  max-width: 500px;
-  width: 90%;
-  position: relative;
-  color: #ececec;
-}
-.modal-close {
-  position: absolute;
-  top: 15px; right: 20px;
-  background: none; border: none;
-  color: #888; font-size: 24px; cursor: pointer;
-}
-.modal-close:hover { color: #fff; }
-}
-  /* Стили для кнопки в футере */
-.legal-link {
-  background: none;
-  border: none;
-  color: #777;
-  text-decoration: underline;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 14px;
-}
 .legal-link:hover { color: #fff; }
 
-/* Стили всплывающего окна */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -266,7 +221,7 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
     <div class="model-card">
       <div>
         <h3 style="margin-top:0; font-size:24px" data-i18n="model_card_title">Tatuaż w specjalnej cenie</h3>
-        <p class="muted" data-i18n="model_card_desc">Regularnie poszukuję modeli do przetestowania nowych projektów, technik i stylów. Płacisz tylko за materiały.</p>
+        <p class="muted" data-i18n="model_card_desc">Regularnie poszukuję modeli do przetestowania nowych projektów, technik i stylów. Płacisz tylko za materiały.</p>
         <ul class="muted" style="padding-left:20px; line-height:1.8">
           <li data-i18n="model_li1">Gotowe autorskie projekty tatuażysty</li>
           <li data-i18n="model_li2">Rabat do 50-70% wartości</li>
@@ -277,7 +232,7 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
     </div>
     <div class="card" style="justify-content:center; align-items:center; text-align:center;">
       <div style="font-size:60px; margin-bottom:15px">📸</div>
-      <h3 data-i18n="model_info_title">Chcesz wypróbować coś nowego?</h3>
+      <h3 data-i18n="model_info_title">Chcesz wypróbować coś нового?</h3>
       <p class="muted" data-i18n="model_info_text">Napisz w komentarzu przy zapisie, jaki styl Cię interesuje, a zaproponuję dostępne projekty dla modeli.</p>
     </div>
   </div>
@@ -293,8 +248,7 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
         <p class="muted" id="selected" style="font-weight:700; color:#d85a73; margin-bottom:15px;">Indywidualny projekt</p>
         <div class="field">
           <label data-i18n="label_name">Imię *</label>
-          <!-- Поле-ловушка для спам-ботов (невидимо для человека) -->
-<input type="text" id="website_honeypot" style="display:none !important;" tabindex="-1" autocomplete="off">
+          <input type="text" id="website_honeypot" style="display:none !important;" tabindex="-1" autocomplete="off">
           <input id="name" data-i18n-ph="ph_name" placeholder="Jak się do Ciebie zwracać?">
         </div>
         <div class="field">
@@ -322,7 +276,6 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
 </section>
 
 <footer>
- <footer>
   <p>
     © 2026 MORK Tattoo. 
     <button type="button" class="legal-link" onclick="toggleModal(true)" data-i18n="footer_rights">
@@ -331,7 +284,6 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
   </p>
 </footer>
 
-<!-- Всплывающее модальное окно -->
 <div id="legalModal" class="modal-overlay" onclick="if(event.target === this) toggleModal(false)">
   <div class="modal-card">
     <button class="modal-close" onclick="toggleModal(false)">&times;</button>
@@ -342,12 +294,11 @@ footer{padding:35px 6%;border-top:1px solid #222;color:#777;font-size:13px;displ
       Wysyłając formularz, wyrażasz zgodę na przetwarzanie danych osobowych (imię, kontakt) wyłącznie w celu kontaktu w sprawie sesji.
     </p>
   </div>
-</footer>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ==========================================
 const i18n = {
   pl: {
     footer_rights: "Wszelkie prawa zastrzeżone ✦ Informacje prawne",
@@ -372,7 +323,7 @@ const i18n = {
     label_comment: "Komentarz / Uwagi", ph_comment: "Dodatkowe życzenia lub opis pomysłu", btn_submit: "Wyślij zgłoszenie",
     steps_title: "Jak to działa?", step1: "Wysyłasz zgłoszenie przez formularz", step2: "Otrzymuję wiadomość bezpośrednio na Telegram",
     step3: "Omawiamy szkic, szczegóły oraz wycenę", step4: "Wybieramy dogodny termin", step5: "Spotykamy się na sesję tatuażu",
-    footer_rights: "Wszelkie prawa zastrzeżone", choose_btn: "Wybierz projekt", model_selected_text: "Zgłoszenie na MODELA (Specjalna cena)"
+    choose_btn: "Wybierz projekt", model_selected_text: "Zgłoszenie na MODELA (Specjalna cena)"
   },
   en: {
     footer_rights: "All rights reserved ✦ Legal Info",
@@ -397,7 +348,7 @@ const i18n = {
     label_comment: "Comments / Details", ph_comment: "Additional wishes or design description", btn_submit: "Send Booking Request",
     steps_title: "How it works", step1: "You submit a booking request", step2: "I receive your message directly on Telegram",
     step3: "We discuss the sketch, details and pricing", step4: "We set a convenient date", step5: "We meet for the tattoo session",
-    footer_rights: "All rights reserved", choose_btn: "Select Design", model_selected_text: "Application for MODEL (Special price)"
+    choose_btn: "Select Design", model_selected_text: "Application for MODEL (Special price)"
   },
   uk: {
     footer_rights: "Усі права захищені ✦ Правова інформація",
@@ -422,7 +373,7 @@ const i18n = {
     label_comment: "Коментар / Побажання", ph_comment: "Додаткові побажання чи опис ідеї", btn_submit: "Надіслати заявку",
     steps_title: "Як все відбувається?", step1: "Залишаєш заявку на сайті", step2: "Я отримую повідомлення прямо в Telegram",
     step3: "Узгоджуємо ескіз, деталі та вартість", step4: "Обираємо зручну дату", step5: "Зустрічаємось на сеанс татуювання",
-    footer_rights: "Усі права захищені", choose_btn: "Обрати ескіз", model_selected_text: "Заявка на МОДЕЛЬ (Спеціальна ціна)"
+    choose_btn: "Обрати ескіз", model_selected_text: "Заявка на МОДЕЛЬ (Спеціальна ціна)"
   },
   de: {
     footer_rights: "Alle Rechte vorbehalten ✦ Rechtliche Hinweise",
@@ -447,7 +398,7 @@ const i18n = {
     label_comment: "Anmerkungen", ph_comment: "Zusätzliche Wünsche oder Details", btn_submit: "Anfrage Absenden",
     steps_title: "Ablauf", step1: "Du sendest die Anfrage ab", step2: "Ich erhalte sie direkt per Telegram",
     step3: "Wir besprechen Motiv und Preis", step4: "Wir vereinbaren einen Termin", step5: "Tattoo-Session findet statt",
-    footer_rights: "Alle Rechte vorbehalten", choose_btn: "Motiv wählen", model_selected_text: "Bewerbung als MODELL (Sonderpreis)"
+    choose_btn: "Motiv wählen", model_selected_text: "Bewerbung als MODELL (Sonderpreis)"
   },
   ru: {
     footer_rights: "Все права защищены ✦ Правовая информация",
@@ -472,23 +423,28 @@ const i18n = {
     label_comment: "Комментарий / Пожелания", ph_comment: "Дополнительные пожелания или описание идеи", btn_submit: "Отправить заявку",
     steps_title: "Как всё происходит?", step1: "Оставляешь заявку на сайте", step2: "Я получаю сообщение прямо в Telegram",
     step3: "Согласовываем эскиз, детали и стоимость", step4: "Выбираем удобную дату", step5: "Встречаемся на сеанс татуировки",
-    footer_rights: "Все права защищены", choose_btn: "Выбрать эскиз", model_selected_text: "Заявка на МОДЕЛЬ (Специальная цена)"
-    }
-    }
-    function toggleModal(show) {
+    choose_btn: "Выбрать эскиз", model_selected_text: "Заявка на МОДЕЛЬ (Специальная цена)"
+  }
+};
+
+let currentLang = 'pl';
+let currentCategory = 'all';
+let worksData = [];
+
+function toggleModal(show) {
   const modal = document.getElementById('legalModal');
+  if (!modal) return;
   if (show) {
     modal.classList.add('active');
   } else {
     modal.classList.remove('active');
   }
-};
-
-let currentLang = 'pl';
+}
 
 function changeLang(lang) {
   currentLang = lang;
   const t = i18n[lang];
+  if (!t) return;
 
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -500,20 +456,43 @@ function changeLang(lang) {
     if (t[key]) el.placeholder = t[key];
   });
 
-  renderGallery();
+  renderGallery(currentCategory);
 }
 
-function filterWorks(style, btn) {
-  document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
-  btn.classList.add('active');
-  currentFilter = style;
-  renderGallery();
+// 1. Загрузка данных из works.json
+async function loadWorks() {
+  try {
+    const response = await fetch('works.json');
+    if (!response.ok) return;
+    worksData = await response.json();
+    renderGallery(currentCategory);
+  } catch (error) {
+    console.error('Ошибка загрузки галереи:', error);
+  }
 }
 
-function chooseWork(title, price) {
-  document.getElementById('selected').textContent = `Sketch: "${title}" (od ${price} zł)`;
-  location.hash = 'booking';
-  toast('OK!');
+// 2. Отрисовка картинок в галерее
+function renderGallery(category = currentCategory) {
+  const grid = document.getElementById('gallery');
+  if (!grid) return;
+
+  const filtered = (category === 'all') 
+    ? worksData 
+    : worksData.filter(item => item.category === category);
+
+  grid.innerHTML = filtered.map(item => `
+    <div class="work-card" data-category="${item.category || ''}">
+      <img src="${item.src}" alt="Tattoo work" loading="lazy">
+    </div>
+  `).join('');
+}
+
+// 3. Переключение категорий по кнопкам
+function filterWorks(category, btnElement) {
+  currentCategory = category;
+  document.querySelectorAll('.filters .filter').forEach(btn => btn.classList.remove('active'));
+  if (btnElement) btnElement.classList.add('active');
+  renderGallery(category);
 }
 
 function updateEstimate() {
@@ -541,15 +520,17 @@ function applyCustomToBooking() {
 }
 
 function applyAsModel() {
-  document.getElementById('selected').textContent = i18n[currentLang].model_selected_text;
+  const modelText = (i18n[currentLang] && i18n[currentLang].model_selected_text) 
+    ? i18n[currentLang].model_selected_text 
+    : 'Zgłoszenie na MODELA (Specjalna cena)';
+  document.getElementById('selected').textContent = modelText;
   document.getElementById('comment').value = "Chcę zgłosić się jako MODEL / Модель / Model request.";
   location.hash = 'booking';
   toast('OK!');
 }
 
-// --- Отправка в Telegram ---
+// Отправка заявки
 async function submitBooking() {
-  // 1. Проверка ловушки для ботов
   const honeypot = document.getElementById('website_honeypot').value;
   if (honeypot !== "") {
     toast('Zgłoszenie wysłane!');
@@ -566,7 +547,6 @@ async function submitBooking() {
     return;
   }
 
-// Собираем данные формы для отправки на Cloudflare Worker
   const payload = {
     name: name,
     contact: contact,
@@ -575,7 +555,6 @@ async function submitBooking() {
     comment: comment || ''
   };
 
-  // Тексты всплывающих уведомлений для каждого языка
   const toastMessages = {
     pl: {
       success: 'Wysłano pomyślnie!',
@@ -594,7 +573,6 @@ async function submitBooking() {
     }
   };
 
-  // Определяем активный язык (если язык неизвестен, берем 'pl')
   const activeLang = (typeof currentLang !== 'undefined' && toastMessages[currentLang]) ? currentLang : 'pl';
 
   try {
@@ -620,6 +598,7 @@ async function submitBooking() {
 
 function toast(msg) {
   const t = document.getElementById('toast');
+  if (!t) return;
   t.textContent = msg;
   t.style.display = 'block';
   setTimeout(() => { t.style.display = 'none'; }, 2500);
@@ -628,47 +607,6 @@ function toast(msg) {
 function toggleNav() { document.getElementById('navlinks').classList.toggle('open'); }
 function closeNav() { document.getElementById('navlinks').classList.remove('open'); }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderGallery();
-});
-  let worksData = [];
-
-// 1. Загрузка данных из works.json
-async function loadWorks() {
-  try {
-    const response = await fetch('works.json');
-    if (!response.ok) return;
-    worksData = await response.json();
-    renderGallery('all');
-  } catch (error) {
-    console.error('Ошибка загрузки галереи:', error);
-  }
-}
-
-// 2. Отрисовка картинок внутри <div id="gallery">
-function renderGallery(category) {
-  const grid = document.getElementById('gallery');
-  if (!grid) return;
-
-  const filtered = (category === 'all') 
-    ? worksData 
-    : worksData.filter(item => item.category === category);
-
-  grid.innerHTML = filtered.map(item => `
-    <div class="work-card" data-category="${item.category}">
-      <img src="${item.src}" alt="Tattoo work" loading="lazy">
-    </div>
-  `).join('');
-}
-
-// 3. Обработка кликов по кнопкам "All", "Custom", "Flash", "Model"
-function filterWorks(category, btnElement) {
-  document.querySelectorAll('.filters .filter').forEach(btn => btn.classList.remove('active'));
-  if (btnElement) btnElement.classList.add('active');
-  renderGallery(category);
-}
-
-// Автоматический запуск при открытии сайта
 document.addEventListener('DOMContentLoaded', loadWorks);
 </script>
 </body>
