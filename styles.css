@@ -412,3 +412,75 @@ footer { text-align: center; padding: 40px; border-top: 1px solid var(--border-c
   background: #141417;
   position: relative;
 }
+
+/* Баннер скидки для моделей */
+.model-banner {
+  padding: 35px 0;
+}
+
+.model-card {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(20, 20, 23, 0.85) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 20px;
+  padding: 30px 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.model-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--accent-gold);
+  color: #000;
+  font-weight: 800;
+  font-size: 11px;
+  text-transform: uppercase;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.model-content h2 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.model-content p {
+  color: var(--text-secondary);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.model-content b {
+  color: var(--accent-gold);
+}
+
+.btn-model {
+  white-space: nowrap;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-model:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .model-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 25px 20px;
+  }
+  
+  .btn-model {
+    width: 100%;
+  }
+}
