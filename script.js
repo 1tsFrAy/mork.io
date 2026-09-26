@@ -273,4 +273,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('modalDesc').innerText = item.description || translations[currentLang].noDesc;
     document.getElementById('imageModal').style.display = 'flex';
   }
-});
+// --- 6. МОДАЛКА ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ (RODO) ---
+  const privacyBtn = document.getElementById('privacyBtn');
+  const privacyModal = document.getElementById('privacyModal');
+  const privacyClose = document.getElementById('privacyClose');
+
+  if (privacyBtn && privacyModal) {
+    privacyBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      privacyModal.style.display = 'flex';
+    });
+  }
+
+  if (privacyClose && privacyModal) {
+    privacyClose.addEventListener('click', () => {
+      privacyModal.style.display = 'none';
+    });
+  }
+
+  if (privacyModal) {
+    privacyModal.addEventListener('click', (e) => {
+      if (e.target === privacyModal) privacyModal.style.display = 'none';
+    });
+  }
