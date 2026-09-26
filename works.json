@@ -2,5 +2,11 @@
   "custom": [],
   "model": [],
   "flash": [],
-  "works": []
+  "works": [
+    {
+      "id": 1790458152012,
+      "src": "images/works/works_1790458152012.jpg",
+      "caption": "67"
+    }
+  ]
 }
