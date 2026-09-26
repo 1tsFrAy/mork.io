@@ -1,26 +1,5 @@
 {
   "custom": [],
   "model": [],
-  "flash": [],
-  "works": [
-    {
-      "id": 1790458152012,
-      "src": "images/works/works_1790458152012.jpg",
-      "caption": "67"
-    }
-  ],
-  "models": [
-    {
-      "id": 1790458189493,
-      "src": "images/models/models_1790458189493.jpg",
-      "caption": ""
-    }
-  ],
-  "sketches": [
-    {
-      "id": 1790458198193,
-      "src": "images/sketches/sketches_1790458198193.jpg",
-      "caption": "Гггг"
-    }
-  ]
+  "flash": []
 }
