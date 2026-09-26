@@ -503,38 +503,6 @@ function changeLang(lang) {
   renderGallery();
 }
 
-// --- Данные Галереи ---
-const worksData = [
-  { id: 1, title: "Moon line", style: "fine", desc: "Fine Line · 7 cm", price: "250", symbol: "☾" },
-  { id: 2, title: "Black wings", style: "black", desc: "Blackwork · 12 cm", price: "450", symbol: "𓆩𓆪" },
-  { id: 3, title: "Orbit", style: "minimal", desc: "Minimal · 5 cm", price: "180", symbol: "✺" }
-];
-
-let currentFilter = 'all';
-
-function renderGallery() {
-  const container = document.getElementById('gallery');
-  container.innerHTML = '';
-  const filtered = worksData.filter(w => currentFilter === 'all' || w.style === currentFilter);
-
-  filtered.forEach(w => {
-    const card = document.createElement('div');
-    card.className = 'card work';
-    card.innerHTML = `
-      <div>
-        <div class="preview">${w.symbol}</div>
-        <h3>${w.title}</h3>
-        <p class="muted">${w.desc}</p>
-      </div>
-      <div>
-        <div class="price">od ${w.price} zł</div>
-        <button class="btn" style="width:100%" onclick="chooseWork('${w.title}', '${w.price}')">${i18n[currentLang].choose_btn}</button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
-}
-
 function filterWorks(style, btn) {
   document.querySelectorAll('.filter').forEach(x => x.classList.remove('active'));
   btn.classList.add('active');
