@@ -42,7 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
       noDesc: "Описание отсутствует.",
       sending: "Отправка...",
       successMsg: "✅ Заявка успешно отправлена! Скоро свяжусь с вами.",
-      errorMsg: "❌ Не удалось отправить заявку. Напишите напрямую."
+      errorMsg: "❌ Не удалось отправить заявку. Напишите напрямую.",
+      modelBannerBadge: "🔥 Спецпредложение",
+      modelBannerTitle: "Любишь скидки? 📸",
+      modelBannerDesc: "Стань моей моделью для реализации масштабных задумок и получи скидку от 30% на сеанс!",
+      modelBannerBtn: "Хочу стать моделью"
     },
     en: {
       navAbout: "About",
@@ -84,7 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
       noDesc: "No description provided.",
       sending: "Sending...",
       successMsg: "✅ Application sent successfully! I will contact you soon.",
-      errorMsg: "❌ Failed to send application. Please write directly."
+      errorMsg: "❌ Failed to send application. Please write directly.",
+      modelBannerBadge: "🔥 Special Offer",
+      modelBannerTitle: "Love discounts? 📸",
+      modelBannerDesc: "Become my model for large-scale creative projects and get 30%+ off your session!",
+      modelBannerBtn: "Become a model"
     },
     pl: {
       navAbout: "O mnie",
@@ -126,7 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
       noDesc: "Brak opisu.",
       sending: "Wysyłanie...",
       successMsg: "✅ Zgłoszenie wysłane! Wkrótce się skontaktuję.",
-      errorMsg: "❌ Błąd wysyłania. Napisz bezpośrednio."
+      errorMsg: "❌ Błąd wysyłania. Napisz bezpośrednio.",
+      modelBannerBadge: "🔥 Oferta Specjalna",
+      modelBannerTitle: "Lubisz zniżki? 📸",
+      modelBannerDesc: "Zostań moją modelką/modelem do realizacji dużych projektów i zgarnij od 30% zniżki na sesję!",
+      modelBannerBtn: "Chcę zostać modelem"
     },
     de: {
       navAbout: "Über mich",
@@ -168,7 +180,11 @@ document.addEventListener('DOMContentLoaded', () => {
       noDesc: "Keine Beschreibung vorhanden.",
       sending: "Senden...",
       successMsg: "✅ Anfrage erfolgreich gesendet! Ich melde mich bald.",
-      errorMsg: "❌ Fehler beim Senden. Bitte direkt schreiben."
+      errorMsg: "❌ Fehler beim Senden. Bitte direkt schreiben.",
+      modelBannerBadge: "🔥 Sonderangebot",
+      modelBannerTitle: "Lust auf Rabatte? 📸",
+      modelBannerDesc: "Werde mein Modell für großflächige Konzepte und erhalte ab 30% Rabatt auf deine Session!",
+      modelBannerBtn: "Modell werden"
     },
     ua: {
       navAbout: "Про мене",
@@ -210,7 +226,11 @@ document.addEventListener('DOMContentLoaded', () => {
       noDesc: "Опис відсутній.",
       sending: "Надсилання...",
       successMsg: "✅ Заявку успішно надіслано! Скоро зв'яжуся з вами.",
-      errorMsg: "❌ Не вдалося надіслати заявку. Напишіть напряму."
+      errorMsg: "❌ Не вдалося надіслати заявку. Напишіть напряму.",
+      modelBannerBadge: "🔥 Спецпропозиція",
+      modelBannerTitle: "Любиш знижки? 📸",
+      modelBannerDesc: "Стань моєю моделлю для реалізації масштабних задумів та отримай знижку від 30% на сеанс!",
+      modelBannerBtn: "Хочу стати моделлю"
     }
   };
 
