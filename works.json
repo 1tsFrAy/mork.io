@@ -7,6 +7,13 @@
       "category": "custom"
     }
   ],
-  "model": [],
+  "model": [
+    {
+      "id": 1790456784160,
+      "src": "images/model/model_1790456784160.jpg",
+      "caption": "",
+      "category": "model"
+    }
+  ],
   "flash": []
 }
