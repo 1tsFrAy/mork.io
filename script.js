@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
       tabAll: "Все работы", tabCustom: "🎨 Custom", tabModel: "📸 Для моделей", tabFlash: "⚡️ Flash",
       emptyState: "В этой категории пока нет загруженных работ.", noDesc: "Описание отсутствует.",
       sending: "Отправка...", successMsg: "✅ Заявка успешно отправлена! Скоро свяжусь с вами.", errorMsg: "❌ Не удалось отправить заявку. Напишите напрямую."
+      rodoNotice: "Я соглашаюсь на обработку персональных данных для записи на сеанс (RODO / GDPR).",
+      privacyLink: "Политика конфиденциальности (RODO)",
+      privacyTitle: "Политика конфиденциальности",
+      privacyText: "Администратором ваших персональных данных является MORK Tattoo. Данные, указанные в форме (имя, контакт, описание), используются исключительно для связи с вами по поводу записи на сеанс и обсуждения эскиза. Данные не передаются третьим лицам и не используются для рекламы. Вы имеете право запросить удаление своих данных в любой момент, написав мне напрямую."
     },
     en: {
       navAbout: "About", navServices: "Services", navPortfolio: "Portfolio ✦", navBook: "Book Now",
@@ -37,7 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
       tabAll: "All Works", tabCustom: "🎨 Custom", tabModel: "📸 For Models", tabFlash: "⚡️ Flash",
       emptyState: "No works uploaded in this category yet.", noDesc: "No description provided.",
       sending: "Sending...", successMsg: "✅ Application sent successfully! I will contact you soon.", errorMsg: "❌ Failed to send application. Please write directly."
-    },
+      rodoNotice: "I agree to the processing of my personal data for session booking (GDPR / RODO).",
+      privacyLink: "Privacy Policy (GDPR)",
+      privacyTitle: "Privacy Policy",
+      privacyText: "The administrator of your personal data is MORK Tattoo. Information provided in the booking form (name, contact, project details) is used solely to contact you regarding your appointment. Your data will never be shared with third parties or used for marketing. You have the right to request deletion of your data at any time."
+  },
     pl: {
       navAbout: "O mnie", navServices: "Usługi", navPortfolio: "Portfolio ✦", navBook: "Zapisz się",
       heroSubtitle: "Tattoo Artist & Visual Creator", heroTitle: "Indywidualne tatuaże z charakterem",
@@ -55,6 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
       tabAll: "Wszystkie", tabCustom: "🎨 Custom", tabModel: "📸 Dla modeli", tabFlash: "⚡️ Flash",
       emptyState: "Brak prac w tej kategorii.", noDesc: "Brak opisu.",
       sending: "Wysyłanie...", successMsg: "✅ Zgłoszenie wysłane! Wkrótce się skontaktuję.", errorMsg: "❌ Błąd wysyłania. Napisz bezpośrednio."
+      rodoNotice: "Wyrażam zgodę na przetwarzanie danych osobowych w celu rezerwacji sesji (RODO).",
+    privacyLink: "Polityka Prywatności (RODO)",
+    privacyTitle: "Polityka Prywatności",
+    privacyText: "Administratorem Twoich danych osobowych jest MORK Tattoo. Dane podane w formularzu (imię, kontakt, opis) są wykorzystywane wyłącznie w celu kontaktu w sprawie rezerwacji terminu i omówienia tatuażu. Dane nie są przekazywane podmiotom trzecim ani wykorzystywane do celów marketingowych. Masz prawo do żądania usunięcia swoich danych w dowolnym momencie."
     },
     de: {
       navAbout: "Über mich", navServices: "Leistungen", navPortfolio: "Portfolio ✦", navBook: "Buchen",
@@ -73,6 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
       tabAll: "Alle Arbeiten", tabCustom: "🎨 Custom", tabModel: "📸 Für Modelle", tabFlash: "⚡️ Flash",
       emptyState: "In dieser Kategorie gibt es noch keine Arbeiten.", noDesc: "Keine Beschreibung vorhanden.",
       sending: "Senden...", successMsg: "✅ Anfrage erfolgreich gesendet! Ich melde mich bald.", errorMsg: "❌ Fehler beim Senden. Bitte direkt schreiben."
+      rodoNotice: "Ich stimme der Verarbeitung meiner Daten zur Terminbuchung zu (DSGVO / RODO).",
+    privacyLink: "Datenschutzerklärung (DSGVO)",
+    privacyTitle: "Datenschutzerklärung",
+    privacyText: "Verantwortlich für Ihre Daten ist MORK Tattoo. Die im Formular angegebenen Daten werden ausschließlich zur Kontaktaufnahme bezüglich Ihrer Buchung verwendet. Ihre Daten werden nicht an Dritte weitergegeben. Sie haben jederzeit das Recht, die Löschung Ihrer Daten zu verlangen."
     },
     ua: {
       navAbout: "Про мене", navServices: "Послуги", navPortfolio: "Портфоліо ✦", navBook: "Записатися",
@@ -91,6 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
       tabAll: "Усі роботи", tabCustom: "🎨 Custom", tabModel: "📸 Для моделей", tabFlash: "⚡️ Flash",
       emptyState: "У цій категорії поки немає завантажених робіт.", noDesc: "Опис відсутній.",
       sending: "Надсилання...", successMsg: "✅ Заявку успішно надіслано! Скоро зв'яжуся з вами.", errorMsg: "❌ Не вдалося надіслати заявку. Напишіть напряму."
+      rodoNotice: "Я погоджуюся на обробку персональних даних для запису на сеанс (RODO / GDPR).",
+    privacyLink: "Політика конфіденційності (RODO)",
+    privacyTitle: "Політика конфіденційності",
+    privacyText: "Адміністратором ваших персональних даних є MORK Tattoo. Дані, вказані у формі (ім'я, контакт, опис), використовуються виключно для зв'язку з вами щодо запису на сеанс. Дані не передаються третім особам. Ви маєте право вимагати видалення своїх даних у будь-який момент."
     }
   };
 
