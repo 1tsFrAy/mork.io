@@ -1,17 +1,5 @@
 {
-  "works": [
-    {
-      "id": 1790456204422,
-      "src": "images/works/works_1790456204422.jpg",
-      "caption": ""
-    }
-  ],
-  "models": [
-    {
-      "id": 1790456222880,
-      "src": "images/models/models_1790456222880.jpg",
-      "caption": "67"
-    }
-  ],
-  "sketches": []
+  "custom": [],
+  "model": [],
+  "flash": []
 }
