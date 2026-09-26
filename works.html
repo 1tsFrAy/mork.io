@@ -72,8 +72,19 @@
   </div>
 
   <footer>
-    <p>© MORK Tattoo. All rights reserved.</p>
-  </footer>
+   <footer>
+  <p>© MORK Tattoo. All rights reserved.</p>
+  <p><a href="#" id="privacyBtn" class="privacy-link" data-i18n="privacyLink">Polityka Prywatności (RODO)</a></p>
+</footer>
+
+<!-- Модальное окно Политики Конфиденциальности -->
+<div id="privacyModal" class="modal">
+  <div class="modal-content-wrapper privacy-card">
+    <span class="modal-close" id="privacyClose">&times;</span>
+    <h3 data-i18n="privacyTitle" style="margin-bottom: 15px;">Политика конфиденциальности</h3>
+    <p id="privacyText" data-i18n="privacyText" style="font-size: 14px; color: var(--text-secondary); line-height: 1.7;"></p>
+  </div>
+</div>
 
   <script src="script.js"></script>
 </body>
